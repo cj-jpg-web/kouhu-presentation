@@ -24,14 +24,19 @@
         </div>
         <div class="geo-map" aria-hidden="true">
           <div class="geo-grid"></div>
-          <svg class="taiwan-map" viewBox="0 0 520 760" fill="none">
-            <path class="island" d="M304 54C346 89 363 153 350 214C339 267 371 313 349 369C326 425 299 477 278 535C255 596 225 661 184 709C159 680 151 633 158 588C166 539 142 498 159 448C178 391 213 347 220 289C227 226 203 169 230 115C248 80 273 57 304 54Z"/>
-            <path class="county" d="M203 385C238 367 284 365 332 382"/>
-            <circle class="destination" cx="207" cy="406" r="9"/>
-            <circle class="destination-ring" cx="207" cy="406" r="26"/>
-          </svg>
+          <div class="taiwan-map geo-terrain" aria-label="OpenStreetMap view of Taiwan">
+            <div class="map-tiles">
+              <img src="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/7/54/105" alt=""><img src="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/7/54/106" alt=""><img src="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/7/54/107" alt="">
+              <img src="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/7/55/105" alt=""><img src="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/7/55/106" alt=""><img src="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/7/55/107" alt="">
+              <img src="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/7/56/105" alt=""><img src="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/7/56/106" alt=""><img src="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/7/56/107" alt="">
+            </div>
+            <div class="map-relief"></div>
+            <span class="map-label taipei">TAIPEI</span>
+            <span class="map-label yunlin">YUNLIN COUNTY</span>
+            <span class="map-label kouhu"><i></i>KOUHU</span>
+          </div>
           <svg class="geo-route" viewBox="0 0 1600 900" fill="none">
-            <path d="M150 160C410 220 540 260 692 345C835 424 885 493 1001 532C1126 574 1245 535 1390 620"/>
+            <path d="M1260 210C1190 300 1110 385 980 430C910 455 860 480 825 500"/>
           </svg>
           <div class="geo-crumbs">
             <span>TAIWAN</span><i></i><span>YUNLIN COUNTY</span><i></i><span>KOUHU</span>
@@ -40,9 +45,9 @@
         </div>
         <div class="geo-campus" aria-hidden="true"></div>
         <div class="geo-title">
-          <span>KOUHU ELEMENTARY SCHOOL</span>
           <h1>English<br><em>lives</em> here.</h1>
-          <b>MAKE ENGLISH NORMAL · FROM DAY 1</b>
+          <p>Building Strong Foundations from Day 1</p>
+          <div class="geo-title-meta"><span>口湖國小</span><i></i><span>YUNLIN · TAIWAN</span></div>
         </div>
         <div class="geo-progress" aria-hidden="true"><i></i></div>
         <button class="geo-skip" id="skipIntro">SKIP INTRO <span>↗</span></button>
