@@ -1,0 +1,41 @@
+from pathlib import Path
+from urllib.request import Request, urlopen
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+OUT = Path(__file__).parent / "dist" / "assets" / "photos"
+OUT.mkdir(parents=True, exist_ok=True)
+
+URLS = {
+    "classroom-01.jpg": "https://scontent.ftug1-1.fna.fbcdn.net/v/t39.30808-6/535431550_1173760154771928_2462820868772021469_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx1477x1108&ctp=s590x590&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFMiESfGiIdc05bzBbRTPwSb1Qare-Y7_9vVBqt75jv_-qzXef2vCoIFaIhj-PPV0jjT7eAFnGFV3N3AfAmOCnY&_nc_ohc=Aq18xTWF8C0Q7kNvwFQLtBq&_nc_oc=AdrlPuphfQdoAZmDpV4NYyhYO2jas7D2DSPlMFUqvdrDGYFEbKgdcGStypzHDJeHICs&_nc_zt=23&_nc_ht=scontent.ftug1-1.fna&_nc_gid=Z8xOcbaG8xA4UcjnfhL9Xw&_nc_ss=7b2a8&oh=00_AQOkGtGFA7ycJU4MaJuDC8WyCIhY3uKnY91qOuBFd6ns5w&oe=6AE164B2",
+    "classroom-02.jpg": "https://scontent.ftug1-1.fna.fbcdn.net/v/t39.30808-6/536830419_1173760158105261_2231990163654961023_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx1477x1108&ctp=s590x590&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFWFprbB9fByUfT0BP73nHoapKmVPrr7iJqkqZU-uvuIpPYrLofAwaedoG6DRAK_iym8V_HQco3ewWBhsjVgqyU&_nc_ohc=J4-yHL6e1P4Q7kNvwHsZica&_nc_oc=AdpjeYGUSnbWVV-Kpe5Z3-ajhqDwTKoZEH7ZFgtkUunBl6lAN1BQxgPpK4x5hgSf_Ls&_nc_zt=23&_nc_ht=scontent.ftug1-1.fna&_nc_gid=Z8xOcbaG8xA4UcjnfhL9Xw&_nc_ss=7b2a8&oh=00_AQMhVYxpU1-2mgXQsycGgz2JJRtHuxTdPBglJXUIL9q_kA&oe=6AE16C5B",
+    "corridor-restroom.jpg": "https://scontent.ftug1-1.fna.fbcdn.net/v/t39.30808-6/535130769_1173760161438594_1767577951483200358_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx1477x1108&ctp=s590x590&_nc_cat=104&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeH6JhRHQsDpaS_-zEogGcqXrZzVYA-6q06tnNVgD7qrTsKUfDuiLQRn2JWuS0fg_UAEmWvuzh3iREnhUTbxkOdX&_nc_ohc=80dd_X9vYBoQ7kNvwF0YMrx&_nc_oc=AdojBbqyHCXMyWBfiRUA9e76LLw6txnQxzx7ZS5HzxjPwoMVxcwbrKlMtvKGy0W3zF8&_nc_zt=23&_nc_ht=scontent.ftug1-1.fna&_nc_gid=Z8xOcbaG8xA4UcjnfhL9Xw&_nc_ss=7b2a8&oh=00_AQOzCoQMyt0UlzN4MTmqKi02ziRh4Oh7hlM5_aPd1HLwEQ&oe=6AE168E0",
+    "doorway.jpg": "https://scontent.ftug1-1.fna.fbcdn.net/v/t39.30808-6/537192237_1173760318105245_4251600310223725910_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx1477x1108&ctp=s590x590&_nc_cat=104&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGeG3_f8ZJGGV5BwpKbDPGSTlqfgvuo2V5OWp-C-6jZXgB9MZcVJoP5bhFtr80hQudlBgYHqPyc6eawsymuHu-p&_nc_ohc=G3xEHFE1M94Q7kNvwHCuW8g&_nc_oc=AdrjjBPhHjVRY2EfeSiT04zo9iHrS68YQXBmZ9-oGnrcSlAbIbrM_o7QUvss4Ij7k5Q&_nc_zt=23&_nc_ht=scontent.ftug1-1.fna&_nc_gid=Z8xOcbaG8xA4UcjnfhL9Xw&_nc_ss=7b2a8&oh=00_AQNkC-SJRXqH6LEugsftri0PPdUAbV7ipszL0aUVLqADaA&oe=6AE17769",
+    "restroom.jpg": "https://scontent.ftug1-1.fna.fbcdn.net/v/t39.30808-6/535817699_1173760314771912_3948847477556080499_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx1477x1108&ctp=s590x590&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEJeON-bhF6hzM719yjAY262eX_pGt5BObZ5f-ka3kE5rcikQOtrxbDBmtdmvAa8dBChNjuPlu0tnWCDJ-VK2V0&_nc_ohc=kcrDL_S86dYQ7kNvwEHA2_0&_nc_oc=AdoMhhfZciEZpacSjfbACTuSXHvUZTWOdMJ6MeNXf8UbzkcpqARFoZnby_Ds0UvKn_Q&_nc_zt=23&_nc_ht=scontent.ftug1-1.fna&_nc_gid=Z8xOcbaG8xA4UcjnfhL9Xw&_nc_ss=7b2a8&oh=00_AQMHgd4y3-XDUhbzwzntPZQN5hYjzwRXokDN_HVFdBhSYw&oe=6AE14E04",
+    "english-room-01.jpg": "https://scontent.ftug1-1.fna.fbcdn.net/v/t39.30808-6/829196590_1510802311067709_252527189676013301_n.jpg?stp=dst-jpg_tt6&cstp=mx1280x960&ctp=s590x590&_nc_cat=107&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHv1wU_dTAubnkaxxWO4KxlZSvC1dHEAw9lK8LV0cQDD3D5q58PlEHn1jiSOMAIGOstGwqLKHH7iTt6_YoKzXw0&_nc_ohc=djp4hzxeF7kQ7kNvwHt7qoY&_nc_oc=AdqSLNN0aZycjp4xUF2bF3kYhVTlb00IzkxqjqjsKZY_TwM9HKUSl3LV8JAxk4ImALs&_nc_zt=23&_nc_ht=scontent.ftug1-1.fna&_nc_gid=lCdtuVSIZJTjVE8cR1V-Qg&_nc_ss=7b2a8&oh=00_AQNt2ktf7hbmfFajc1Ua4AE53n3E8UR16owR5WQH6WaV7A&oe=6AE177A3",
+    "english-room-02.jpg": "https://scontent.ftug1-1.fna.fbcdn.net/v/t39.30808-6/829196676_1510802314401042_2612610908828917957_n.jpg?stp=dst-jpg_tt6&cstp=mx1280x960&ctp=s590x590&_nc_cat=110&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEQ7yZ_Kopo7G6P2hwkSJVX-6LYK_NkdpP7otgr82R2k4ZAla8LCx5KX5lcgFWqTSU8-a_RCO5zBE45RzJcgSYa&_nc_ohc=k0OfekFubU0Q7kNvwGl0cic&_nc_oc=Adpz30lmhe2WsBXL9PiwKnb4UMGJYIj0HcOhZT3fpJz1LoTLI7K71nTi0Dzr5hNjz1M&_nc_zt=23&_nc_ht=scontent.ftug1-1.fna&_nc_gid=lCdtuVSIZJTjVE8cR1V-Qg&_nc_ss=7b2a8&oh=00_AQOEloPCvP7JBLT0SjoOK6YQoZFBmXWpu3eSbthdmpYujg&oe=6AE14A42",
+    "english-room-03.jpg": "https://scontent.ftug1-1.fna.fbcdn.net/v/t39.30808-6/829196617_1510802317734375_1785079846614166495_n.jpg?stp=dst-jpg_tt6&cstp=mx1280x960&ctp=s590x590&_nc_cat=103&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGwUtp6GRYyf8kV65GdCn4wAbjMyotyG9sBuMzKi3Ib29JY5qd7oTSKyGQru-Ci37dbQA9nwIbVmZeEBk1CI0kG&_nc_ohc=_JiclsQukG8Q7kNvwHcVPaa&_nc_oc=AdrJq7VD1RaaqplP-adG2QXoDoppIZt7CfAJMBh_2VLSaMx3OYQdmvpT-NbqJEZIv5I&_nc_zt=23&_nc_ht=scontent.ftug1-1.fna&_nc_gid=lCdtuVSIZJTjVE8cR1V-Qg&_nc_ss=7b2a8&oh=00_AQPEmBoRJxf2xhhpGAhXRlos-F-iz_YQlSDnOJw9e0IpSQ&oe=6AE14AA0",
+    "english-room-04.jpg": "https://scontent.ftug1-1.fna.fbcdn.net/v/t39.30808-6/829196610_1510802384401035_6348363447522030145_n.jpg?stp=dst-jpg_tt6&cstp=mx1280x960&ctp=s590x590&_nc_cat=111&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFa8zajMztorLWDqkHnoMMrDwRYsLkyP_0PBFiwuTI__Sv3Y_uvvmbYTQE3am3nmjXtlEM5TNhFqCxBq_LxQjhB&_nc_ohc=yURBa8I0gNQQ7kNvwHkYD-E&_nc_oc=AdpGD48x1Y0mAEMXoTvu_MmLEXozh5G9h3oGKpZgEc8UAam0XZ-SnA3HsKu7BkBvuCg&_nc_zt=23&_nc_ht=scontent.ftug1-1.fna&_nc_gid=lCdtuVSIZJTjVE8cR1V-Qg&_nc_ss=7b2a8&oh=00_AQNX8sc5JAZTSDDNXeudZIC3NeZeWd9JW_0HNXg42RjG0g&oe=6AE17EDD",
+    "english-room-05.jpg": "https://scontent.ftug1-1.fna.fbcdn.net/v/t39.30808-6/829196677_1510802387734368_2371268827616493214_n.jpg?stp=dst-jpg_tt6&cstp=mx1280x960&ctp=s590x590&_nc_cat=110&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHawMK68EmvN6FgAcuKdV09MtskaGdA0rAy2yRoZ0DSsJY97MC8fgbLu9Md8npv6Agjt3evCWGSgDWlCojewHsm&_nc_ohc=psIJGC9sXiYQ7kNvwFzppDp&_nc_oc=AdpVfSXD-txbZgeQNlMl5AzCEsuebRIPjj69EN-WHOWgIJ4zSl1eU3GJ_PjKsxQTPXo&_nc_zt=23&_nc_ht=scontent.ftug1-1.fna&_nc_gid=lCdtuVSIZJTjVE8cR1V-Qg&_nc_ss=7b2a8&oh=00_AQMGJl-1bfiSX-8_f1JBazeHwKimiZjfCM5vq-D9PidBMw&oe=6AE16C8E",
+    "english-corridor-01.jpg": "https://scontent.ftug1-1.fna.fbcdn.net/v/t39.30808-6/814534991_1499733735507900_8627310573342840435_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx1477x1108&ctp=s590x590&_nc_cat=105&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeF3QpycNR8IlaLZVK1lwc6KyJ-F0SHID7zIn4XRIcgPvOBjhx6sgFPIzu3epQzEHJXW3N9DvdLfTc3UJ0Wkxmnp&_nc_ohc=KJJwNsp8QG0Q7kNvwGYmBub&_nc_oc=Adpb70mgWMUFJg9vXHMpj8SCsM9t6ku6Lagin9nNi7q2JvFRTImxcRrJYCfXfD2QMNE&_nc_zt=23&_nc_ht=scontent.ftug1-1.fna&_nc_gid=J8wB-5MgjgO843WaBZp3Zw&_nc_ss=7b2a8&oh=00_AQNpyW2RIb8Ohly1AcbS5qvOGydfCNSYS_1zynKjnRO6zQ&oe=6AE167FA",
+    "english-corridor-02.jpg": "https://scontent.ftug1-1.fna.fbcdn.net/v/t39.30808-6/814226758_1499733738841233_5103017415335152564_n.jpg?stp=cp6_dst-jpg_tt6&cstp=mx1477x1108&ctp=s590x590&_nc_cat=100&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGJNktY0BRrOr69EzsDN2EbiJh4fauIjvmImHh9q4iO-XvVLZM1YlT-jCuiee2D5bZSNPtyRq_M3R_B2DRIzQBY&_nc_ohc=pHh-P0u4pP8Q7kNvwFr27XO&_nc_oc=Adqtuf3gSLQwb7lS6OKyk9Ui_sPOkd339RLq6fgtZNqiMh1mSUT-VOF9R4sEvkOzgwA&_nc_zt=23&_nc_ht=scontent.ftug1-1.fna&_nc_gid=J8wB-5MgjgO843WaBZp3Zw&_nc_ss=7b2a8&oh=00_AQOZwcIWa7vdYCx__hHhJqHuuqB8wllqEWVw9bEjtzzSWg&oe=6AE15FF1",
+    "campus-exterior.jpg": "https://lh3.googleusercontent.com/grass-cs/AABkmLd6xHtYAqW6p2v_YNHOtyoNRZQzH3OoKdhL_UMBG06lIa3Ez1x1iJSVv4e_390jQYaCVf5xAw1ude1P4-OMx85OpgZQEQyPFwada3JChNnV2nAS3uwxadkWVOl0v-TWHbdHQjHEbA=w1600-h1067-k-no",
+}
+
+def fetch(item):
+    name, url = item
+    path = OUT / name
+    if path.exists() and path.stat().st_size > 10_000:
+        return "cached", name, path.stat().st_size
+    req = Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    try:
+        with urlopen(req, timeout=20) as response:
+            path.write_bytes(response.read())
+        return "saved", name, path.stat().st_size
+    except Exception as exc:
+        return "FAILED", name, f"{type(exc).__name__}: {exc}"
+
+
+with ThreadPoolExecutor(max_workers=8) as pool:
+    futures = [pool.submit(fetch, item) for item in URLS.items()]
+    for future in as_completed(futures):
+        print(*future.result(), flush=True)
