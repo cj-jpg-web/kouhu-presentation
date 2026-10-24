@@ -80,12 +80,20 @@ function next(){
 function prev(){
   if(isTransitioning)return;
   if(currentBuild>0){currentBuild--;updateBuilds();return}
+  if(current===1 && typeof window.replayKouhuIntro==='function'){
+    window.replayKouhuIntro();
+    return;
+  }
   if(current>0)showSlide(current-1,'backward');
 }
 document.getElementById('next').addEventListener('click',next);
 document.getElementById('prev').addEventListener('click',prev);
 document.querySelectorAll('[data-next]').forEach(el=>el.addEventListener('click',next));
-document.querySelectorAll('[data-goto]').forEach(el=>el.addEventListener('click',()=>showSlide(Number(el.dataset.goto),'forward')));
+document.querySelectorAll('[data-goto]').forEach(el=>el.addEventListener('click',()=>{
+  const target=Number(el.dataset.goto);
+  if(target===0 && current>0 && typeof window.replayKouhuIntro==='function') window.replayKouhuIntro();
+  else showSlide(target,'forward');
+}));
 
 const index=document.getElementById('slideIndex');
 const indexGrid=document.getElementById('indexGrid');
@@ -170,3 +178,4 @@ window.addEventListener('resize',fitDeck);
 fitDeck();
 const initial=Math.max(0,Math.min(slides.length-1,Number(location.hash.slice(1)||1)-1));
 current=-1;showSlide(initial);
+
