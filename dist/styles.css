@@ -1005,13 +1005,16 @@ body.dark-chrome .controls .counter{
   linear-gradient(135deg,#061721,#0c3040 52%,#071923);
 }
 .geo-grid{position:absolute;inset:0;opacity:.18;background-image:linear-gradient(rgba(255,255,255,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.18) 1px,transparent 1px);background-size:64px 64px;transform:perspective(700px) rotateX(62deg) scale(1.7) translateY(80px)}
-.taiwan-map{position:absolute;z-index:2;right:175px;top:45px;width:440px;height:720px;filter:drop-shadow(0 35px 50px rgba(0,0,0,.55))}
-.taiwan-map .island{fill:rgba(20,59,73,.78);stroke:rgba(223,255,79,.75);stroke-width:4}
-.taiwan-map .county{stroke:#fff;stroke-width:2;stroke-dasharray:8 10;opacity:.65}
-.destination{fill:var(--acid)}.destination-ring{stroke:var(--acid);stroke-width:3;opacity:.8;transform-origin:207px 406px;animation:geoPulse 1.6s ease-out infinite}
+.taiwan-map{position:absolute;z-index:2;right:80px;top:-18px;width:760px;height:820px;filter:drop-shadow(0 35px 50px rgba(0,0,0,.55));transform:perspective(1100px) rotateX(9deg) rotateZ(-2deg);overflow:hidden;border:1px solid rgba(255,255,255,.22);clip-path:polygon(8% 0,100% 0,95% 100%,0 94%);background:#b9d8dc}
+.map-tiles{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);transform:scale(1.13)}
+.map-tiles img{width:100%;height:100%;object-fit:cover;filter:saturate(.72) contrast(1.12) brightness(.66)}
+.map-relief{position:absolute;inset:0;background:linear-gradient(115deg,rgba(4,18,27,.76),transparent 42%,rgba(4,18,27,.35)),radial-gradient(circle at 52% 52%,transparent 0 22%,rgba(2,9,14,.5) 80%);box-shadow:inset 0 0 90px rgba(2,9,14,.78)}
+.map-label{position:absolute;z-index:3;padding:7px 10px;background:rgba(3,18,27,.78);border:1px solid rgba(255,255,255,.22);font:700 12px DeckMono;letter-spacing:.13em;color:#fff;box-shadow:0 8px 20px rgba(0,0,0,.25)}
+.map-label.taipei{right:135px;top:178px}.map-label.yunlin{left:160px;top:410px}.map-label.kouhu{left:118px;top:462px;color:var(--acid);border-color:rgba(223,255,79,.55)}
+.map-label.kouhu i{display:inline-block;width:8px;height:8px;margin-right:8px;border-radius:50%;background:var(--acid);box-shadow:0 0 0 8px rgba(223,255,79,.15);animation:geoPulse 1.6s ease-out infinite}
 @keyframes geoPulse{to{transform:scale(2.1);opacity:0}}
 .geo-route{position:absolute;inset:0;width:100%;height:100%;z-index:3}
-.geo-route path{stroke:var(--acid);stroke-width:5;stroke-linecap:round;stroke-dasharray:12 18;filter:drop-shadow(0 0 12px rgba(223,255,79,.35))}
+.geo-route path{stroke:var(--acid);stroke-width:3;stroke-linecap:round;stroke-dasharray:10 14;filter:drop-shadow(0 0 10px rgba(223,255,79,.35))}
 .geo-crumbs{position:absolute;left:76px;bottom:112px;z-index:5;display:flex;align-items:center;gap:20px;font:700 16px DeckMono;letter-spacing:.12em}
 .geo-crumbs span{opacity:0;transform:translateY(12px)}
 .geo-crumbs i{width:44px;height:2px;background:var(--acid);transform:scaleX(0);transform-origin:left}
@@ -1020,11 +1023,20 @@ body.dark-chrome .controls .counter{
 .geo-target b{font:800 20px DeckSans;letter-spacing:.02em}.geo-target span{display:block;margin-top:8px;font:500 13px DeckMono;letter-spacing:.12em;color:#adc3ca}
 .geo-campus{position:absolute;inset:0;z-index:5;opacity:0;transform:scale(1.14);background:linear-gradient(90deg,rgba(7,25,35,.78),rgba(7,25,35,.2) 55%,rgba(7,25,35,.5)),url('assets/photos/campus-hero-v2.webp') center/cover no-repeat}
 .geo-campus:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(2,9,14,.76),transparent 48%),radial-gradient(circle at 70% 42%,transparent 0 28%,rgba(2,9,14,.46) 78%)}
-.geo-title{position:absolute;z-index:9;left:84px;top:188px;width:760px;opacity:0}
-.geo-title>span{display:block;color:#c1d0d4;margin-bottom:34px}
-.geo-title h1{font:800 140px/.77 DeckSans;margin:0;letter-spacing:-.078em;text-transform:uppercase;text-shadow:0 18px 60px rgba(0,0,0,.55)}
-.geo-title h1 em{font-family:DeckEditorial,serif;font-style:italic;text-transform:none;color:var(--acid);font-weight:700}
-.geo-title>b{display:block;margin-top:42px;color:#fff}
+.geo-title{position:absolute;z-index:9;left:70px;top:190px;width:700px;opacity:0;transition:color 1s ease}
+.geo-title h1{font:800 126px/.96 DeckSans;margin:0 0 36px;letter-spacing:-.065em;text-transform:uppercase;text-shadow:0 18px 60px rgba(0,0,0,.35)}
+.geo-title h1 em{font-family:DeckEditorial,serif;font-style:italic;text-transform:none;color:var(--acid);font-weight:700;transition:color 1s ease}
+.geo-title p{font-size:25px;line-height:1.38;max-width:575px;margin:0;color:#e7eff0;transition:color 1s ease}
+.geo-title-meta{display:flex;align-items:center;gap:18px;margin-top:40px;font:500 13px/1 DeckMono;letter-spacing:.16em}.geo-title-meta i{width:7px;height:7px;border-radius:50%;background:var(--acid)}
+.geo-intro,.geo-campus,.geo-title{transition-property:background-color,clip-path,left,right,width,opacity,color,transform;transition-duration:1.05s;transition-timing-function:cubic-bezier(.65,0,.2,1)}
+.geo-intro.handoff{background:var(--bone)}
+.geo-intro.handoff .geo-campus{left:780px;right:auto;width:820px;transform:none;clip-path:polygon(22% 0,100% 0,100% 100%,0 100%,10% 72%,3% 45%);background-position:56% center}
+.geo-intro.handoff .geo-campus:after{background:linear-gradient(90deg,rgba(7,25,35,.08),transparent 45%),linear-gradient(0deg,rgba(7,25,35,.48),transparent 45%)}
+.geo-intro.handoff .geo-title{color:var(--ink)}
+.geo-intro.handoff .geo-title h1{color:var(--ink);text-shadow:none}
+.geo-intro.handoff .geo-title h1 em{color:var(--blue)}
+.geo-intro.handoff .geo-title p{color:#324851}
+.geo-intro.handoff .geo-title-meta i{background:var(--coral)}
 .geo-progress{position:absolute;z-index:12;left:72px;right:72px;bottom:56px;height:2px;background:rgba(255,255,255,.15)}
 .geo-progress i{display:block;width:0;height:100%;background:var(--acid);box-shadow:0 0 14px rgba(223,255,79,.45)}
 .geo-skip{position:absolute;z-index:13;right:68px;top:54px;border:1px solid rgba(255,255,255,.25);background:rgba(7,25,35,.42);color:#fff;padding:13px 17px;font:600 12px DeckMono;letter-spacing:.13em;cursor:pointer;backdrop-filter:blur(12px)}
@@ -1144,4 +1156,3 @@ body.intro-active .chrome,body.intro-active .controls{opacity:0;pointer-events:n
   margin:0!important;padding:0!important;
   text-align:center!important;
 }
-
