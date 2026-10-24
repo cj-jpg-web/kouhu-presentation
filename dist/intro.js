@@ -166,10 +166,11 @@ function startIntro() {
     .to(target, { opacity: 1, y: -8, duration: .7 }, 6.3)
     .to(mapStage, { scale: 1.12, opacity: 0, duration: 1.55 }, 7.15)
     .to(campus, { opacity: 1, scale: 1, duration: 1.8 }, 6.95)
-    .fromTo(title, { opacity: 0, y: 44 }, { opacity: 1, y: 0, duration: 1.05 }, 8.65)
-    .fromTo('.geo-title h1', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.15 }, 8.8)
-    .to(skip, { opacity: 0, duration: .35 }, 10.35)
-    .to(intro, { opacity: 0, duration: .75 }, 10.75);
+    .fromTo(title, { opacity: 0, y: 44 }, { opacity: 1, y: 0, duration: 1.05 }, 8.25)
+    .fromTo('.geo-title h1', { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: 1.05 }, 8.4)
+    .add(() => intro.classList.add('handoff'), 9.65)
+    .to(skip, { opacity: 0, duration: .25 }, 9.65)
+    .to(intro, { opacity: 0, duration: .28 }, 10.82);
 
   if (reduceMotion) tl.timeScale(2.4);
 }
@@ -201,5 +202,8 @@ document.addEventListener('keydown', event => {
   if (['Escape', 'Enter', ' ', 'ArrowRight', 'PageDown'].includes(event.key)) skipIntro(event);
 }, true);
 
-window.replayKouhuIntro = () => location.assign('#1');
+window.replayKouhuIntro = () => {
+  history.replaceState(null, '', '#1');
+  location.reload();
+};
 
