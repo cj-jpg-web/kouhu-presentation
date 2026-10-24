@@ -1082,3 +1082,43 @@ body.dark-chrome .controls .counter{
 .rc3 .rc-pill{color:var(--acid)}
 .pin-c,.floating-word,.way-tag{color:#071923}
 .way-tag{background:var(--acid)}
+
+/* Consistent client palette on every slide, including former light scenes. */
+.slide-cover,.slide-door,.slide-late,.slide-wayfinding,.slide-rhythm,.slide-system{
+  background:#071923;color:#fff;
+}
+.slide-film{background:#071923;color:#fff}
+.cover-copy h1{
+  background:none;-webkit-text-fill-color:#fff;color:#fff;
+}
+.cover-copy h1 span{-webkit-text-fill-color:#dfff4f;color:#dfff4f}
+.cover-copy p,.cover-meta,.routine-copy,.late-copy,.way-copy,.rhythm-head,.system-copy{
+  color:#fff;
+}
+.routine-copy h2,.late-copy h2,.way-copy h2,.rhythm-head h2,.system-copy h2{
+  color:#fff;text-shadow:none;
+}
+.rhythm-head h2 span,.system-copy h2 span{color:#dfff4f}
+.cover-meta,.time span,.week span{color:#b9cbd0}
+.door-slat span{background:#173845}
+.time-track{background:#102d39;color:#fff}
+.time-line{background:#526c76}
+.time-line:before{background:#fff}
+.time-line:after{background:#dfff4f}
+.week strong{color:#fff}
+.week b{background:#102d39;color:#dfff4f;border-color:#294956}
+.week article:hover strong,.week article:nth-child(n):hover strong{color:#dfff4f}
+.rhythm-loop{color:#b9cbd0}
+.way-photo.small{border-color:#102d39}
+.system-wheel svg circle,.system-wheel svg path{stroke:#617b85}
+.system-photo:after{background:#dfff4f;color:#071923}
+.chrome,.identity{color:#fff}
+.monogram{border-color:rgba(255,255,255,.65)}
+.controls{color:#fff}
+.controls button{color:#fff;background:#102d39;border-color:#526c76}
+.controls button:hover{color:#071923;background:#dfff4f;border-color:#dfff4f}
+.controls .counter{color:#fff}
+.progress{background:rgba(255,255,255,.2)}
+.progress>i{background:#dfff4f}
+.eyebrow,.context{color:#b9cbd0}
+.eyebrow:before{background:#dfff4f}
