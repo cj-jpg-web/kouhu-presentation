@@ -1,0 +1,81 @@
+/* FLAGSHIP V3 — auditorium scale, environmental infographics, lighter motion */
+:root{--stage-x:76px;--stage-top:176px;--stage-bottom:118px;--v3-ease:cubic-bezier(.22,1,.36,1)}
+
+/* Motion budget: compositor-friendly transforms and opacity only. */
+[data-enter]{transition:opacity .34s .04s ease,transform .48s .04s var(--v3-ease)!important}
+.build{filter:none!important;transform:translate3d(0,24px,0) scale(.985)!important;transition:opacity .26s ease,transform .48s var(--v3-ease)!important}
+.build.revealed{filter:none!important;transform:none!important}
+.scene-transition{background:transparent!important}
+.scene-transition i{inset:0!important;background:var(--ink)!important;transform:translateX(101%)}
+.scene-transition b,.scene-transition span{display:none!important}
+.scene-changing .scene-transition i{animation:v3Wipe .43s var(--v3-ease)!important}
+.deck[data-direction="backward"].scene-changing .scene-transition{transform:none!important}
+.deck[data-direction="backward"].scene-changing .scene-transition i{animation-name:v3WipeBack!important}
+@keyframes v3Wipe{0%{transform:translateX(101%)}42%,58%{transform:translateX(0)}100%{transform:translateX(-101%)}}
+@keyframes v3WipeBack{0%{transform:translateX(-101%)}42%,58%{transform:translateX(0)}100%{transform:translateX(101%)}}
+
+/* Controls recede until the presenter needs them. */
+.controls{opacity:.28;transition:opacity .22s ease!important}.controls:hover,.controls:focus-within{opacity:1}
+.controls button{box-shadow:none!important;backdrop-filter:none!important}.build-status i{width:8px!important;height:8px!important;box-shadow:none!important}
+
+/* Global identity contrast. */
+.identity{padding:10px 14px 10px 10px;border-radius:999px;background:rgba(247,244,235,.88);box-shadow:0 8px 28px rgba(4,17,24,.12);backdrop-filter:blur(10px)}
+body.dark-chrome .identity{background:rgba(5,24,33,.72)}
+
+/* 01 — remove decorative stickers and let the architecture carry the opening. */
+.slide-cover .route-line{opacity:.28}.slide-cover .pin{display:none}.slide-cover .cover-copy{left:76px!important;top:202px!important;width:660px!important}
+.slide-cover .cover-copy h1{font-size:128px!important;line-height:.88!important;letter-spacing:-.07em!important}.slide-cover .cover-copy p{font-size:28px!important;max-width:580px!important}
+
+/* 02 — the school becomes the infographic. */
+.slide-manifesto .bleed-photo{filter:saturate(.8) contrast(1.08);background-position:center 58%}
+.slide-manifesto .ink-wash{background:linear-gradient(90deg,rgba(3,20,29,.94) 0 37%,rgba(3,20,29,.36) 62%,rgba(3,20,29,.18))!important}
+.slide-manifesto .manifesto-copy{left:72px!important;top:205px!important;width:510px!important;height:auto!important;align-items:flex-start!important;text-align:left!important}
+.slide-manifesto .manifesto-copy h2{text-align:left!important;font-size:68px!important;line-height:1.02!important}
+.responsibility-stack{position:absolute!important;inset:96px 58px 92px 620px!important;width:auto!important;height:auto!important;background:none!important;border:0!important;box-shadow:none!important;perspective:none!important;backdrop-filter:none!important;clip-path:none!important;overflow:visible!important}
+.responsibility-console-head{left:42px!important;right:30px!important;top:18px!important;border:0!important;font-size:13px!important}
+.responsibility-console-foot{display:none!important}.responsibility-links{inset:0!important;width:100%!important;height:100%!important;opacity:.62!important}.responsibility-links path{stroke:rgba(223,255,79,.6)!important;stroke-width:3!important;stroke-dasharray:5 13!important}
+.responsibility-card{width:330px!important;height:auto!important;min-height:122px!important;padding:18px 18px 18px 76px!important;border:0!important;border-left:3px solid var(--acid)!important;border-radius:0!important;background:linear-gradient(90deg,rgba(4,27,37,.92),rgba(4,27,37,.28))!important;box-shadow:none!important;backdrop-filter:none!important;align-items:flex-start!important;text-align:left!important}
+.responsibility-card.rc1{left:40px!important;top:92px!important}.responsibility-card.rc2{left:250px!important;top:286px!important}.responsibility-card.rc3{left:24px!important;top:484px!important}
+.responsibility-card b{left:18px!important;top:30px!important;width:40px!important;height:40px!important;border:1px solid rgba(223,255,79,.55)!important;background:transparent!important;color:var(--acid)!important}
+.responsibility-card strong,.responsibility-card span{text-align:left!important}.responsibility-card strong{font-size:31px!important;line-height:1!important}.responsibility-card span{font-size:18px!important;line-height:1.25!important;margin-top:8px!important;max-width:245px}.rc-pill{align-self:flex-start!important;margin:0 0 8px!important;background:none!important;border:0!important;padding:0!important;color:var(--acid)!important;font-size:12px!important}
+.responsibility-orbit{right:16px!important;left:auto!important;top:238px!important;width:170px!important;height:170px!important;background:rgba(223,255,79,.94)!important;color:var(--ink)!important;box-shadow:0 0 0 18px rgba(223,255,79,.08),0 22px 50px rgba(0,0,0,.28)!important}
+.responsibility-orbit b{font-size:30px!important}.responsibility-orbit i{border-color:rgba(223,255,79,.52)!important}
+
+/* 03 — threshold composition, quieter guidance. */
+.slide-door .door-slat span{width:8px!important}.door-question-arrow path{stroke-width:4!important;stroke-dasharray:4 14!important}.slide-door .routine-copy{left:900px!important;top:278px!important;width:570px!important}.slide-door .routine-copy h2{font-size:91px!important;line-height:1!important}
+
+/* 04 — clock event inside the scene, no lower-third bar. */
+.slide-late .late-grid{grid-template-columns:38% 62%!important}.slide-late .late-copy{padding:260px 30px 0 70px!important}.slide-late .late-copy h2{font-size:88px!important}.slide-late .late-photo{inset:112px 62px 134px 660px!important;width:auto!important;height:auto!important;position:absolute!important}
+.time-track{left:auto!important;right:86px!important;bottom:auto!important;top:168px!important;width:550px!important;height:112px!important;padding:16px 22px!important;border:1px solid rgba(255,255,255,.45)!important;background:rgba(3,22,31,.88)!important;box-shadow:0 18px 45px rgba(3,17,24,.22)!important;backdrop-filter:none!important}
+.time-track .time b{font-size:40px!important}.time-track .time span{font-size:12px!important}.time-track .time-line{margin:0 20px!important}.time-track.revealed .time-line,.time-track.revealed .time-line i{animation-duration:.72s!important}
+
+/* 05 — one voice signal anchored to the student. */
+.slide-here .here-overlay{background:linear-gradient(90deg,rgba(3,22,31,.88),rgba(3,22,31,.34) 56%,rgba(3,22,31,.08))!important}
+.slide-here .here-copy{left:72px!important;top:290px!important}.slide-here .here-copy h2{font-size:178px!important}.attendance-signal{left:auto!important;right:188px!important;top:370px!important;width:184px!important;height:184px!important;background:var(--acid)!important;box-shadow:0 0 0 20px rgba(223,255,79,.1)!important}.attendance-signal b{font-size:40px!important}.attendance-wave{right:180px!important;bottom:150px!important}.voice-rings{right:118px!important;left:auto!important;top:290px!important;width:330px!important;height:330px!important}.roll-call{right:90px!important;top:132px!important}
+
+/* 06 — sentence assembles along the real path. */
+.slide-wayfinding .way-copy{left:72px!important;top:260px!important;width:550px!important}.slide-wayfinding .way-copy h2{font-size:82px!important;line-height:1.04!important}.way-images{right:70px!important;top:105px!important;width:770px!important;height:625px!important}.way-photo.big{border-radius:0!important;box-shadow:24px 24px 0 var(--blue)!important}.way-path path{stroke-width:4!important;stroke-dasharray:7 13!important}.floating-word{font-size:20px!important;padding:14px 18px!important;background:var(--ink)!important;color:#fff!important;border:1px solid rgba(255,255,255,.2)!important;box-shadow:none!important}.fw1{left:120px!important;top:600px!important}.fw2{left:280px!important;top:540px!important}.fw3{left:410px!important;top:480px!important;background:var(--acid)!important;color:var(--ink)!important}
+
+/* 07 — weekly operating system, not a collage. */
+.slide-rhythm .rhythm-head{left:72px!important;top:190px!important;width:520px!important}.slide-rhythm .rhythm-head h2{font-size:66px!important;line-height:1.04!important}
+.rhythm-gallery{right:68px!important;top:128px!important;width:820px!important;height:390px!important}.rhythm-shot{border:0!important;border-radius:0!important;box-shadow:none!important}.shot-learn{left:0!important;top:60px!important;width:235px!important;height:285px!important}.shot-practice{left:210px!important;top:0!important;width:430px!important;height:355px!important;z-index:3!important}.shot-speak{right:0!important;top:68px!important;width:215px!important;height:272px!important}.rhythm-shot figcaption{font-size:18px!important;padding:12px 16px!important}
+.week{left:72px!important;right:72px!important;top:auto!important;bottom:122px!important;height:210px!important;display:grid!important;grid-template-columns:repeat(5,1fr)!important;gap:0!important;border-top:3px solid var(--ink)!important}
+.week article,.week article:first-child{height:210px!important;padding:30px 18px 0!important;border:0!important;border-left:1px solid rgba(7,25,35,.18)!important;background:transparent!important;box-shadow:none!important}.week article:first-child{border-left:0!important}.week b{font-size:16px!important;margin:0 0 18px!important}.week strong{font-size:27px!important}.week span{font-size:16px!important;line-height:1.28!important;margin-top:10px!important}.rhythm-loop{right:72px!important;bottom:90px!important}
+
+/* 08 — evidence wall. */
+.slide-film .film-head{left:72px!important;top:285px!important;width:410px!important}.slide-film .film-head h2{font-size:78px!important}.film-frame{left:520px!important;right:70px!important;top:128px!important;height:620px!important;border-radius:0!important;box-shadow:28px 28px 0 var(--blue)!important}.film-frame .play{width:118px!important;height:118px!important;box-shadow:0 0 0 18px rgba(223,255,79,.12)!important}.film-label b{font-size:25px!important}.film-label em{font-size:15px!important}
+
+/* 09 — words become the interaction; remove the card language. */
+.slide-immersion .immersion-copy{left:72px!important;top:230px!important;width:850px!important}.slide-immersion .immersion-copy h2{font-size:71px!important;line-height:1.08!important}.translation-cross{display:none!important}
+.meaning-chain{left:72px!important;right:72px!important;bottom:130px!important;height:170px!important;display:grid!important;grid-template-columns:1fr auto 1fr auto 1fr auto 1fr!important;gap:12px!important;align-items:center!important}
+.meaning-chain>div{height:145px!important;padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;display:flex!important;align-items:center!important;gap:15px!important}.meaning-chain>div b{position:static!important;width:62px!important;height:62px!important;border-radius:50%!important;display:grid!important;place-items:center!important;font-size:16px!important}.meaning-chain .chain-info span{font-size:50px!important;line-height:1!important}.meaning-chain>i{font-size:38px!important;color:var(--acid)!important}
+
+/* 10 — a single habit engine with spatial labels. */
+.slide-system{background:var(--ink)!important;color:#fff!important}.slide-system:before{content:"";position:absolute;inset:0;z-index:0!important;mix-blend-mode:normal!important;background:linear-gradient(90deg,rgba(3,22,31,.96) 0 38%,rgba(3,22,31,.58)),url('assets/photos/english-corridor-01.jpg') center/cover no-repeat;opacity:.92}
+.slide-system .system-copy{left:72px!important;top:250px!important;width:540px!important;z-index:4!important}.slide-system .system-copy h2{font-size:67px!important;line-height:1.05!important}.slide-system .system-copy h2 span{color:var(--acid)!important}.system-photo{display:none!important}
+.system-wheel{right:50px!important;top:105px!important;width:830px!important;height:690px!important;z-index:3!important}.system-wheel svg{left:110px!important;top:40px!important;width:610px!important;height:610px!important}.system-wheel svg circle{stroke:rgba(223,255,79,.42)!important;stroke-width:2!important;stroke-dasharray:5 11!important}.wheel-center{left:320px!important;top:245px!important;width:190px!important;height:190px!important;background:var(--acid)!important;color:var(--ink)!important;box-shadow:0 0 0 28px rgba(223,255,79,.08)!important}.wheel-center b{font-size:43px!important}.step{width:255px!important;min-height:0!important;padding:8px 0 8px 18px!important;border:0!important;border-left:3px solid var(--acid)!important;background:linear-gradient(90deg,rgba(4,27,37,.9),rgba(4,27,37,0))!important;color:#fff!important;border-radius:0!important;box-shadow:none!important}.step b{font-size:13px!important;color:var(--acid)!important}.step strong{font-size:32px!important;margin:4px 0!important}.step span{font-size:17px!important;line-height:1.24!important}.s1{left:285px!important;top:8px!important}.s2{right:0!important;top:250px!important}.s3{left:285px!important;bottom:0!important}.s4{left:0!important;top:250px!important}
+
+/* 11 — closing payoff, with the language now living across the campus. */
+.slide-finale .finale-wash{background:linear-gradient(90deg,rgba(3,22,31,.94),rgba(3,22,31,.32) 65%,rgba(3,22,31,.12))!important}.slide-finale .finale-copy{left:72px!important;top:265px!important}.slide-finale .finale-copy h2{font-size:110px!important;line-height:.94!important}.finale-ribbon{display:none!important}.finale-echoes{position:absolute;inset:0;z-index:3;pointer-events:none}.finale-echoes span{position:absolute;padding:9px 13px;border:1px solid rgba(255,255,255,.35);background:rgba(4,27,37,.58);color:#fff;font:600 14px DeckMono;letter-spacing:.08em;opacity:.72}.finale-echoes span:nth-child(1){right:310px;top:210px}.finale-echoes span:nth-child(2){right:150px;top:390px;color:var(--acid)}.finale-echoes span:nth-child(3){right:390px;bottom:190px}.finale-echoes span:nth-child(4){right:80px;bottom:270px}.restart{right:72px!important;bottom:118px!important}
+
+@media (prefers-reduced-motion:reduce){.scene-changing .scene-transition{display:none!important}}
