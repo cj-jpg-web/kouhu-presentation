@@ -86,7 +86,7 @@ function replayOpening(){
 function prev(){
   if(isTransitioning)return;
   if(currentBuild>0){currentBuild--;updateBuilds();return}
-  if(current===1){
+  if(current===0){
     replayOpening();
     return;
   }
@@ -97,8 +97,7 @@ document.getElementById('prev').addEventListener('click',prev);
 document.querySelectorAll('[data-next]').forEach(el=>el.addEventListener('click',next));
 document.querySelectorAll('[data-goto]').forEach(el=>el.addEventListener('click',()=>{
   const target=Number(el.dataset.goto);
-  if(target===0 && current>0) replayOpening();
-  else showSlide(target,'forward');
+  showSlide(target,target<current?'backward':'forward');
 }));
 
 const index=document.getElementById('slideIndex');
