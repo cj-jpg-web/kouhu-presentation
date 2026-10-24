@@ -1034,3 +1034,22 @@ body.dark-chrome .controls .counter{
 .finale-copy{top:248px}
 .finale-copy h2{margin:0;line-height:1.04}
 .restart{bottom:140px}
+
+/* Center the responsibility slide within its usable presentation area. */
+.slide-manifesto .manifesto-copy{
+  left:72px;top:170px;bottom:140px;width:610px;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;
+}
+.slide-manifesto .manifesto-copy h2{
+  width:100%;margin:0;text-align:center;font-size:70px;line-height:1.08;
+}
+.slide-manifesto .responsibility-card{
+  align-items:center;justify-content:center;text-align:center;
+  padding:20px 24px 20px 88px;
+}
+.slide-manifesto .responsibility-card strong,
+.slide-manifesto .responsibility-card span{width:100%;text-align:center}
+.slide-manifesto .rc-pill{align-self:center}
+.slide-manifesto .responsibility-orbit{display:flex;align-items:center;justify-content:center}
+.slide-manifesto .responsibility-orbit b{text-align:center;line-height:1.05;margin:0}
