@@ -14,6 +14,39 @@
 <body>
   <main class="viewport" aria-label="Interactive presentation">
     <div class="deck" id="deck">
+      <section class="geo-intro" id="geoIntro" aria-label="Journey to Kouhu Elementary School">
+        <canvas id="earthCanvas" aria-hidden="true"></canvas>
+        <div class="earth-fallback" aria-hidden="true"></div>
+        <div class="geo-stars" aria-hidden="true"></div>
+        <div class="geo-copy geo-orbit-copy">
+          <span>23.58° N · 120.18° E</span>
+          <b>A place on Earth</b>
+        </div>
+        <div class="geo-map" aria-hidden="true">
+          <div class="geo-grid"></div>
+          <svg class="taiwan-map" viewBox="0 0 520 760" fill="none">
+            <path class="island" d="M304 54C346 89 363 153 350 214C339 267 371 313 349 369C326 425 299 477 278 535C255 596 225 661 184 709C159 680 151 633 158 588C166 539 142 498 159 448C178 391 213 347 220 289C227 226 203 169 230 115C248 80 273 57 304 54Z"/>
+            <path class="county" d="M203 385C238 367 284 365 332 382"/>
+            <circle class="destination" cx="207" cy="406" r="9"/>
+            <circle class="destination-ring" cx="207" cy="406" r="26"/>
+          </svg>
+          <svg class="geo-route" viewBox="0 0 1600 900" fill="none">
+            <path d="M150 160C410 220 540 260 692 345C835 424 885 493 1001 532C1126 574 1245 535 1390 620"/>
+          </svg>
+          <div class="geo-crumbs">
+            <span>TAIWAN</span><i></i><span>YUNLIN COUNTY</span><i></i><span>KOUHU</span>
+          </div>
+          <div class="geo-target"><i></i><b>KOUHU ELEMENTARY SCHOOL</b><span>雲林縣口湖國民小學</span></div>
+        </div>
+        <div class="geo-campus" aria-hidden="true"></div>
+        <div class="geo-title">
+          <span>KOUHU ELEMENTARY SCHOOL</span>
+          <h1>English<br><em>lives</em> here.</h1>
+          <b>MAKE ENGLISH NORMAL · FROM DAY 1</b>
+        </div>
+        <div class="geo-progress" aria-hidden="true"><i></i></div>
+        <button class="geo-skip" id="skipIntro">SKIP INTRO <span>↗</span></button>
+      </section>
       <div class="ambient" aria-hidden="true"></div>
       <div class="scene-transition" aria-hidden="true"><i></i><b></b><span></span></div>
       <header class="chrome">
@@ -26,7 +59,7 @@
 
       <section class="slide slide-cover active" data-title="English Lives Here" aria-label="Title slide">
         <div class="cover-copy" data-enter>
-          <h1>Make English<br><span>normal.</span></h1>
+          <h1>English<br><span>lives</span> here.</h1>
           <p>Building Strong Foundations from Day 1</p>
           <div class="cover-meta"><span>口湖國小</span><i></i><span>YUNLIN · TAIWAN</span></div>
         </div>
@@ -38,7 +71,7 @@
           </svg>
           <div class="pin pin-a">HELLO</div><div class="pin pin-b">READY?</div><div class="pin pin-c">LET'S GO</div>
         </div>
-        <button class="start" data-next><span>Begin the journey</span><b>→</b></button>
+        <button class="start" data-next><span>Enter the school</span><b>→</b></button>
       </section>
 
       <section class="slide slide-manifesto" data-title="The shared promise" aria-label="English is everyone's responsibility">
@@ -218,6 +251,10 @@
       </div>
     </div>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/MotionPathPlugin.min.js"></script>
+  <script type="module" src="intro.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
+
