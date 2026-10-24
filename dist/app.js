@@ -77,11 +77,17 @@ function next(){
   if(currentBuild<max){currentBuild++;updateBuilds();return}
   if(current<slides.length-1)showSlide(current+1,'forward');
 }
+
+function replayOpening(){
+  history.replaceState(null,'','#1');
+  window.location.reload();
+}
+
 function prev(){
   if(isTransitioning)return;
   if(currentBuild>0){currentBuild--;updateBuilds();return}
-  if(current===1 && typeof window.replayKouhuIntro==='function'){
-    window.replayKouhuIntro();
+  if(current===1){
+    replayOpening();
     return;
   }
   if(current>0)showSlide(current-1,'backward');
@@ -91,7 +97,7 @@ document.getElementById('prev').addEventListener('click',prev);
 document.querySelectorAll('[data-next]').forEach(el=>el.addEventListener('click',next));
 document.querySelectorAll('[data-goto]').forEach(el=>el.addEventListener('click',()=>{
   const target=Number(el.dataset.goto);
-  if(target===0 && current>0 && typeof window.replayKouhuIntro==='function') window.replayKouhuIntro();
+  if(target===0 && current>0) replayOpening();
   else showSlide(target,'forward');
 }));
 
