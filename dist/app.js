@@ -64,11 +64,11 @@ function showSlide(next,entry='forward'){
   deck.dataset.transition=String(next%4);
   deck.dataset.direction=next>current?'forward':'backward';
   deck.classList.add('scene-changing');
-  window.setTimeout(()=>activateSlide(next,entry),210);
+  window.setTimeout(()=>activateSlide(next,entry),150);
   window.setTimeout(()=>{
     deck.classList.remove('scene-changing');
     isTransitioning=false;
-  },690);
+  },430);
 }
 
 function next(){
