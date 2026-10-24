@@ -964,3 +964,73 @@ body{transition:background-color .4s ease}
 body.dark-chrome .controls .counter{
   color:white;
 }
+
+
+/* Spacing refinement: retain the existing visual system and infographic builds. */
+.manifesto-copy{left:72px;top:202px;width:600px}
+.manifesto-copy h2{font-size:72px;line-height:1.04;letter-spacing:-.045em;margin:0}
+.responsibility-stack{left:750px;right:64px;top:150px;width:auto;height:620px}
+.responsibility-console-head{left:38px;right:38px}
+.responsibility-card{left:32px!important;width:390px;height:148px;padding:18px 22px 18px 90px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center}
+.responsibility-card.rc1{top:76px}
+.responsibility-card.rc2{top:252px}
+.responsibility-card.rc3{top:428px}
+.responsibility-card:before{left:20px;top:48px;width:50px;height:50px}
+.responsibility-card b{left:20px;top:48px;width:50px;height:50px;display:grid;place-items:center}
+.responsibility-card strong{font-size:27px;line-height:1.08}
+.responsibility-card span{margin-top:12px;line-height:1.35}
+.rc-pill{align-self:flex-start;margin-bottom:12px}
+.responsibility-orbit{left:auto;right:40px;top:236px;width:148px;height:148px;display:grid;place-items:center}
+.responsibility-orbit b{line-height:1.05;margin:0}
+.responsibility-orbit i{inset:-24px}
+.responsibility-orbit i:nth-child(2){inset:-44px}
+.cover-copy{top:190px;width:700px}
+.cover-copy h1{font-size:126px;line-height:.96;margin:0 0 36px;letter-spacing:-.065em}
+.cover-meta{margin-top:40px}
+.routine-copy{top:258px;left:920px;width:600px}
+.routine-copy h2{margin:0;line-height:1.04}
+.late-copy{padding-top:248px}
+.late-copy h2{margin:0;line-height:1.04}
+.time-track{bottom:132px}
+.time span{margin-top:10px;line-height:1.35}
+.here-copy{top:254px}
+.here-copy h2{margin:0;line-height:.88}
+.way-copy{top:252px;width:630px}
+.way-copy h2{margin:0;line-height:1.04;font-size:86px}
+.way-images{right:64px;width:760px}
+.rhythm-head{top:202px;width:580px}
+.rhythm-head h2{font-size:68px;line-height:1.06;margin:0}
+.rhythm-gallery{right:64px;top:142px;width:740px;height:390px}
+.shot-learn{width:230px;height:270px}
+.shot-practice{left:170px;width:420px;height:340px}
+.shot-speak{width:220px;height:260px}
+.week{top:576px;left:72px;right:72px}
+.week article,.week article:first-child{height:198px;padding:0 24px}
+.week b{margin-bottom:20px}
+.week strong{line-height:1.1}
+.week span{margin-top:12px;line-height:1.4}
+.film-head{top:262px;width:450px}
+.film-head h2{font-size:82px;line-height:1.05;margin:0}
+.film-frame{left:600px;right:80px;top:158px;height:560px}
+.immersion-copy{top:216px}
+.immersion-copy h2{line-height:1.06;margin:0}
+.meaning-chain{left:72px;right:72px;bottom:138px;gap:20px}
+.meaning-chain>div{padding:22px;gap:20px;align-items:center}
+.meaning-chain .chain-info{width:auto;height:auto;padding:0;margin:0;border:0;background:none;box-shadow:none;backdrop-filter:none;gap:0}
+.system-copy{top:222px;width:620px}
+.system-copy h2{font-size:70px;line-height:1.08;margin:0}
+.system-wheel{right:42px;top:150px;width:740px;height:600px}
+.system-wheel svg{left:70px;top:0;width:600px;height:600px}
+.wheel-center{left:280px;top:210px;width:180px;height:180px}
+.wheel-center b{line-height:1.04}
+.step{width:248px;min-height:142px;padding:22px 24px}
+.step strong{margin:12px 0;line-height:1.08}
+.step span{line-height:1.4}
+.s1{left:246px;top:0}
+.s2{right:0;top:224px}
+.s3{left:246px;bottom:0}
+.s4{left:0;top:224px}
+.system-photo{width:570px;height:190px;bottom:144px}
+.finale-copy{top:248px}
+.finale-copy h2{margin:0;line-height:1.04}
+.restart{bottom:140px}
