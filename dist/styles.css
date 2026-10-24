@@ -1053,3 +1053,24 @@ body.dark-chrome .controls .counter{
 .slide-manifesto .rc-pill{align-self:center}
 .slide-manifesto .responsibility-orbit{display:flex;align-items:center;justify-content:center}
 .slide-manifesto .responsibility-orbit b{text-align:center;line-height:1.05;margin:0}
+
+/* Explicit centered headline stage, overriding legacy entrance positioning. */
+.slide-manifesto.active .manifesto-copy,
+.slide-manifesto .manifesto-copy[data-enter]{
+  position:absolute!important;
+  left:72px!important;right:auto!important;
+  top:170px!important;bottom:auto!important;
+  width:610px!important;height:590px!important;
+  box-sizing:border-box!important;
+  display:flex!important;flex-direction:column!important;
+  align-items:center!important;justify-content:center!important;
+  padding:0!important;margin:0!important;
+  text-align:center!important;
+  transform:none!important;
+}
+.slide-manifesto .manifesto-copy h2{
+  flex:0 0 auto!important;
+  width:100%!important;
+  margin:0!important;padding:0!important;
+  text-align:center!important;
+}
